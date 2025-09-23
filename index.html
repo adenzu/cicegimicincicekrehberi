@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Daily Flower</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #ffffff;
+            color: #fff;
+            font-family: sans-serif;
+        }
+
+        .crop {
+            width: 30vw;
+            overflow: hidden;
+        }
+
+        .crop img {
+            width: 120%;
+            height: 120%;
+            margin: -10% -10% -10% -10%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="crop">
+        <img id="flowerText" alt="flower" />
+    </div>
+    <div class="crop">
+        <img id="flowerImage" alt="flower" />
+    </div>
+
+    <script>
+        const totalImages = 81;  // change this to your number of flower images
+        const anchorDate = new Date("2025-09-20"); // you can change this
+
+        function daysBetween(d1, d2) {
+            const msPerDay = 86400000;
+            return Math.floor((d2 - d1) / msPerDay);
+        }
+
+        const today = new Date();
+        const diff = daysBetween(anchorDate, today);
+        const index = ((diff % totalImages) + totalImages) % totalImages + 1;
+
+        const textIndex = 2 * index;
+        const imageIndex = textIndex + 1;
+
+        const img1 = document.getElementById("flowerText");
+        img1.src = `images/CamScanner 23.09.2025 18.20_${textIndex}.jpg`;
+
+        const img2 = document.getElementById("flowerImage");
+        img2.src = `images/CamScanner 23.09.2025 18.20_${imageIndex}.jpg`;
+    </script>
+</body>
+
+</html>
