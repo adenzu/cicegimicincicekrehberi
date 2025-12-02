@@ -2,19 +2,117 @@
 <html lang="en">
 
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Dawning of a New Day' rel='stylesheet'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Daily Flower</title>
     <style>
         body {
             margin: 0;
+            background: #fff;
+            color: #000;
+            font-family: sans-serif;
+        }
+
+        /* Only center the inner content, not the entire page */
+        .page {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            background: #ffffff;
-            color: #fff;
-            font-family: sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ---------- Headings ---------- */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Inter", sans-serif;
+            font-weight: 700;
+            color: #111;
+            margin: 1.2em 0 0.5em;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.3rem;
+        }
+
+        h5 {
+            font-size: 1.1rem;
+        }
+
+        h6 {
+            font-size: 1rem;
+        }
+
+        /* ---------- Paragraphs & Text ---------- */
+        p {
+            margin: 0 0 1.1em;
+            font-weight: 400;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        /* ---------- Links ---------- */
+        a {
+            color: #0066ee;
+            text-decoration: none;
+            transition: 0.2s ease;
+        }
+
+        a:hover {
+            color: #004bb5;
+            text-decoration: underline;
+        }
+
+        /* ---------- Utility Classes ---------- */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-muted {
+            color: #666;
+        }
+
+        .text-large {
+            font-size: 1.25rem;
+        }
+
+        .text-small {
+            font-size: 0.85rem;
+        }
+
+        /* ---------- Smooth Rendering ---------- */
+        body,
+        p,
+        a,
+        span {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .crop {
@@ -27,39 +125,62 @@
             height: 110%;
             margin: -5% -5% -5% -5%;
         }
+
+        .center-text {
+            text-align: center;
+            margin-top: 6vh;
+            /* optional */
+            margin-bottom: -10vh;
+            /* space above images */
+            font-family: 'Dawning of a New Day';
+            font-size: 44px;
+        }
+
+        .center-text2 {
+            text-align: right;
+            margin-top: -14vh;
+            margin-right: 10vh;
+            font-family: 'Dawning of a New Day';
+            font-size: 26px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="crop">
-        <img id="flowerText" alt="flower" />
+    <h1 class="center-text">🌸Çiçegim için Çiçek Rehberi🌸</h1>
+    <div class="page">
+        <div class="crop">
+            <img id="flowerText" alt="flower" />
+        </div>
+        <div class="crop">
+            <img id="flowerImage" alt="flower" />
+        </div>
     </div>
-    <div class="crop">
-        <img id="flowerImage" alt="flower" />
-    </div>
+    <p class="center-text2">made by Selin Gürses
+    <p>
 
-    <script>
-        const totalImages = 81;  // change this to your number of flower images
-        const anchorDate = new Date("2025-09-20"); // you can change this
+        <script>
+            const totalImages = 81;  // change this to your number of flower images
+            const anchorDate = new Date("2025-09-20"); // you can change this
 
-        function daysBetween(d1, d2) {
-            const msPerDay = 86400000;
-            return Math.floor((d2 - d1) / msPerDay);
-        }
+            function daysBetween(d1, d2) {
+                const msPerDay = 86400000;
+                return Math.floor((d2 - d1) / msPerDay);
+            }
 
-        const today = new Date();
-        const diff = daysBetween(anchorDate, today);
-        const index = ((diff % totalImages) + totalImages) % totalImages + 1;
+            const today = new Date();
+            const diff = daysBetween(anchorDate, today);
+            const index = ((diff % totalImages) + totalImages) % totalImages + 1;
 
-        const textIndex = 2 * index;
-        const imageIndex = textIndex + 1;
+            const textIndex = 2 * index;
+            const imageIndex = textIndex + 1;
 
-        const img1 = document.getElementById("flowerText");
-        img1.src = `images/CamScanner 23.09.2025 18.20_${textIndex}.jpg`;
+            const img1 = document.getElementById("flowerText");
+            img1.src = `images/CamScanner 23.09.2025 18.20_${textIndex}.jpg`;
 
-        const img2 = document.getElementById("flowerImage");
-        img2.src = `images/CamScanner 23.09.2025 18.20_${imageIndex}.jpg`;
-    </script>
+            const img2 = document.getElementById("flowerImage");
+            img2.src = `images/CamScanner 23.09.2025 18.20_${imageIndex}.jpg`;
+        </script>
 </body>
 
 </html>
