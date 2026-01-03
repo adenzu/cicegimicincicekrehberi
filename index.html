@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Fuggles' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Fuggles" rel="stylesheet">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Daily Flower</title>
@@ -143,43 +143,112 @@
             font-family: 'Fuggles';
             font-size: 42px;
         }
+
+        #rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .emoji {
+            position: absolute;
+            top: -2rem;
+            font-size: 2rem;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+                opacity: 0.2;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <h1 class="center-text">🌸Çiçegim için Çiçek Rehberi🌸</h1>
-    <div class="page">
-        <div class="crop">
-            <img id="flowerText" alt="flower" />
-        </div>
-        <div class="crop">
-            <img id="flowerImage" alt="flower" />
-        </div>
+    <h1 class="center-text">🌸Çiçeğim için Çiçek Rehberi🌸</h1>
+    <div id="flowerImages" class="page">
     </div>
+    <div id="rain"></div>
     <p class="center-text2">made by Selin Gürses
     <p>
 
         <script>
-            const totalImages = 81;  // change this to your number of flower images
-            const anchorDate = new Date("2025-09-20"); // you can change this
+            const totalImages = 80;  // change this to your number of flower images
+            const anchorDate = new Date("2025-09-21"); // you can change this
 
             function daysBetween(d1, d2) {
                 const msPerDay = 86400000;
                 return Math.floor((d2 - d1) / msPerDay);
             }
 
+            function isDaySpecial(date) {
+                const specialDay = new Date("2023-05-19");
+                return (specialDay.getDate() === date.getDate()) && (specialDay.getMonth() === date.getMonth());
+            }
+
+            const emojis = ["💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "🧡", "💛", "💚", "💙", "💜"];
+
+            function createEmoji() {
+                const emoji = document.createElement("div");
+                emoji.className = "emoji";
+                emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+                // Random horizontal start position
+                emoji.style.left = Math.random() * 100 + "vw";
+
+                // Random duration & size variation
+                emoji.style.animationDuration = (2 + Math.random() * 3) + "s";
+                emoji.style.fontSize = (20 + Math.random() * 20) + "px";
+
+                document.getElementById("rain").appendChild(emoji);
+
+                // Remove the emoji after animation ends
+                setTimeout(() => {
+                    emoji.remove();
+                }, 5000);
+            }
+
             const today = new Date();
             const diff = daysBetween(anchorDate, today);
             const index = ((diff % totalImages) + totalImages) % totalImages + 1;
 
-            const textIndex = 2 * index;
-            const imageIndex = textIndex + 1;
+            var textIndex = 2 * index;
+            var imageIndex = textIndex + 1;
 
-            const img1 = document.getElementById("flowerText");
-            img1.src = `images/CamScanner 23.09.2025 18.20_${textIndex}.jpg`;
+            if (isDaySpecial(today)) {
+                setInterval(createEmoji, 200);
+                textIndex = 163;
+                imageIndex = 162;
+            }
+            else {
+                const imgs = document.getElementById("flowerImages");
+                imgs.innerHTML +=
+                    `              
+<div class="crop">
+<img id="flowerText" alt="" />
+</div>
+`
+                const img1 = document.getElementById("flowerText");
+                img1.src = `images/CamScanner 23.09.2025 18.20_${textIndex}.jpg`;
+            }
+
+            const imgs = document.getElementById("flowerImages");
+            imgs.innerHTML +=
+                `     
+<div class="crop">
+<img id="flowerImage" alt="" />
+</div>
+`
 
             const img2 = document.getElementById("flowerImage");
             img2.src = `images/CamScanner 23.09.2025 18.20_${imageIndex}.jpg`;
+
         </script>
 </body>
 
